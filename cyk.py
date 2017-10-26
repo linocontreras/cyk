@@ -19,8 +19,8 @@ def main():
         else:
             cadenas.append(line.rstrip())
             
-    print(gramatica)
-    print(cadenas)
+    # print(gramatica)
+    # print(cadenas)
     placa = 1
     for cadena in cadenas:
         matriz = []
