@@ -1,36 +1,38 @@
-# Investigación:
-# https://docs.google.com/a/itesm.mx/document/d/15gC2sLom1BWTUWHxANNiOitrXRAFweyLSq9qP_1RGdI/edit?usp=sharing
+import fileinput
 
 def main():
     
     gramatica = {}
+
+    lines = []
+    cadenas = []
     
-    # Leer número de producciones
-    n = int(input())
+    for line in fileinput.input():
+       lines.append(line)
     
-    #Leer producciones
-    for i in range(0,n):
-        
-        #Lee cada producción.
-        tmp = input()
-        
-        #Separa terminales de no terminales.
-        noterminal, tmp = tmp.split('-')
-        producciones = tmp.split(',')
-        
-        #Agrega al diccionario usando noterminal como llave y asignándole un set de producciones.
-        gramatica[noterminal] = frozenset(producciones)
+    #Lee cada producción.
+    for i,line in enumerate(lines):
+        tmp = line.rstrip().split(' ')
+        size = len(tmp)
+        if(size > 1):
+            gramatica[tmp[0]] = tmp[1:]
+        else:
+            cadenas.append(line.rstrip())
+            
+    print(gramatica)
+    print(cadenas)
     
-    cadena = input()
+    for cadena in cadenas:
+        matriz = []
+        for i,letter in enumerate(cadena):
+            arr = []
+            for key in gramatica:
+                if letter in gramatica[key]:
+                    arr.append(key)
+            matriz.append(arr)
+        print(matriz)
     
-    cadenalen = len(cadena)
-    mat = []
-    for i in range(0,cadenalen):
-        mat.append([])
-        for k,v in gramatica.items():
-            if cadena[i] in v:
-                mat[i].append(k)
     
-    print(mat)
+
 main()
 

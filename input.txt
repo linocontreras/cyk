@@ -1,4 +1,8 @@
-S-AB,BC
-A-BA,a
-B-CC,b
-C-AB,a
+S AB BC
+A BA a
+B CC b
+C AB a
+baaba
+ababa
+abbabb
+aaaa 
