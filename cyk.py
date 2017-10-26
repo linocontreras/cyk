@@ -7,7 +7,7 @@ def main():
     lines = []
     cadenas = []
     
-    for line in fileinput.input():
+    for line in fileinput.input(openhook=fileinput.hook_encoded("iso-8859-1")):
        lines.append(line)
     
     #Lee cada producción.
@@ -52,9 +52,5 @@ def main():
         print("Accepted")
         print("Rejected")
         print("Rejected")
-        
-    
-    
 
 main()
-
