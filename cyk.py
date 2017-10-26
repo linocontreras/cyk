@@ -7,7 +7,7 @@ def main():
     lines = []
     cadenas = []
     
-    for line in fileinput.input(openhook=fileinput.hook_encoded("iso-8859-1")):
+    for line in fileinput.input(openhook=fileinput.hook_encoded("utf-8")):
        lines.append(line)
     
     #Lee cada producción.
