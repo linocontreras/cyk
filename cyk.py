@@ -7,7 +7,7 @@ def main():
     lines = []
     cadenas = []
     
-    for line in fileinput.input('-'):
+    for line in fileinput.input():
        lines.append(line)
     
     #Lee cada producción.
@@ -19,38 +19,50 @@ def main():
         else:
             cadenas.append(line.rstrip())
             
-    # print(gramatica)
-    # print(cadenas)
-    placa = 1
+    noterminales = set()
+    terminales = set()
+    for key in gramatica:
+        noterminales.add(key)
+        for v in gramatica[key]:
+            if(all(c.islower() for c in v)):
+                terminales.add(v)
+    
+    rules = []
+    for key in gramatica:
+        for p in gramatica[key]:
+            if p in terminales:
+            	rules.append((key, [p])) 
+            else:
+                tmp = tuple(x for x in p)
+                producciones.append((key, tmp))
+    
     for cadena in cadenas:
-        matriz = []
-        for i,letter in enumerate(cadena):
-            arr = []
-            for key in gramatica:
-                if letter in gramatica[key]:
-                    arr.append(key)
-            matriz.append(arr)
-        #print(matriz)
-        
-    if len(cadenas) == 4:
-        print("Accepted")
-        print("Accepted")
-        print("Rejected")
-        print("Rejected")
-        
-    if len(cadenas) == 5:
-        print("Accepted")
-        print("Accepted")
-        print("Accepted")
-        print("Rejected")
-        print("Rejected")
-        
-    if len(cadenas) == 6:
-        print("Accepted")
-        print("Accepted")
-        print("Accepted")
-        print("Accepted")
-        print("Rejected")
-        print("Rejected")
-
+        if cyk(terminales,noterminales,producciones,'A',cadena):
+            print("Accepted")
+        else:
+            print("Rejected")
+            
+    
+def cyk(terminales,noterminales,producciones,inicio,cadena):
+	matriz=dict()
+	n=len(cadena)
+	for i in range(1,n+1):
+		for j in range(1,n+1):
+			for k in noterminales:
+				matriz[(i,j,k)]=False
+	for i in range(1,n+1):
+		for produccion in producciones:
+			if len(produccion[1])==1:
+				if produccion[1][0]==cadena[i-1]:
+					matriz[(i,1,produccion[0])]=True
+	for i in range(2,n+1):
+		for j in range(1,n-i+2):
+			for k in range(1,i):
+				for produccion in producciones:
+					if len(produccion[1])==2:
+						if matriz[(j,k,produccion[1][0])] and matriz[(j+k,i-k,produccion[1][1])]:
+							matriz[(j,i,produccion[0])]=True
+							
+	return matriz[(1,n,inicio)]
+	
 main()
