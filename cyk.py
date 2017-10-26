@@ -27,11 +27,11 @@ def main():
             if(all(c.islower() for c in v)):
                 terminales.add(v)
     
-    rules = []
+    producciones = []
     for key in gramatica:
         for p in gramatica[key]:
             if p in terminales:
-            	rules.append((key, [p])) 
+            	producciones.append((key, [p])) 
             else:
                 tmp = tuple(x for x in p)
                 producciones.append((key, tmp))
