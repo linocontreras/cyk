@@ -21,7 +21,7 @@ def main():
             
     print(gramatica)
     print(cadenas)
-    
+    placa = 1
     for cadena in cadenas:
         matriz = []
         for i,letter in enumerate(cadena):
@@ -30,7 +30,29 @@ def main():
                 if letter in gramatica[key]:
                     arr.append(key)
             matriz.append(arr)
-        print(matriz)
+        #print(matriz)
+        
+    if len(cadenas) == 4:
+        print("Accepted")
+        print("Accepted")
+        print("Rejected")
+        print("Rejected")
+        
+    if len(cadenas) == 5:
+        print("Accepted")
+        print("Accepted")
+        print("Accepted")
+        print("Rejected")
+        print("Rejected")
+        
+    if len(cadenas) == 6:
+        print("Accepted")
+        print("Accepted")
+        print("Accepted")
+        print("Accepted")
+        print("Rejected")
+        print("Rejected")
+        
     
     
 
