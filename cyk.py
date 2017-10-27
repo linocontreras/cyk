@@ -28,7 +28,6 @@ def main():
         for v in gramatica[key]:
             if len(v) == 1 and not v in gramatica.keys():
                 terminales.add(v)
-    print(terminales)
     
     producciones = []
     for key in gramatica:
