@@ -23,9 +23,12 @@ def main():
     terminales = set()
     for key in gramatica:
         noterminales.add(key)
+
+    for key in gramatica:
         for v in gramatica[key]:
-            if(all(c.islower() for c in v)):
+            if len(v) == 1 and not v in gramatica.keys():
                 terminales.add(v)
+    print(terminales)
     
     producciones = []
     for key in gramatica:
@@ -35,9 +38,9 @@ def main():
             else:
                 tmp = tuple(x for x in p)
                 producciones.append((key, tmp))
-    
+                
     for cadena in cadenas:
-        if cyk(terminales,noterminales,producciones,'A',cadena):
+        if cyk(terminales,noterminales,producciones,lines[0][0],cadena):
             print("Accepted")
         else:
             print("Rejected")
